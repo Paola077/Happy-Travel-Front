@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import ButtonExample from './components/ButtonExample'
 import { SignInForm } from './components/signInForm/SignInForm'
+import { LogInForm } from './components/logInForm/LogInForm'
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
     </div>
     <ButtonExample/>
     <SignInForm />
+    <LogInForm/>
     </>
   )
 }
