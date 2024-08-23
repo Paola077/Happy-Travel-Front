@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import './App.css'
 import ButtonExample from './components/ButtonExample'
+import { SignInForm } from './components/signInForm/SignInForm'
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
       Tailwind CSS is working!
     </div>
     <ButtonExample/>
+    <SignInForm />
     </>
   )
 }
