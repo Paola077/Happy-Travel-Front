@@ -1,18 +1,27 @@
 import { useState } from 'react'
 
 import './App.css'
-import ButtonExample from './components/ButtonExample'
+import CancelButton from './components/buttons/CancelButton'
+import AcceptButton from './components/buttons/AcceptButton'
+import PaginationButton from './components/buttons/PaginationButton'
 import { SignInForm } from './components/signInForm/SignInForm'
 import { LogInForm } from './components/logInForm/LogInForm'
 
 function App() {
+
+  const handleCancel = ()  => {
+    alert("Has presionado el botón cancelar.")
+  }
+
+  const handleAcept = ()  => {
+    alert("Has presionado el botón aceptar.")
+  }
   
   return (
     <>
-    <div className="p-4 bg-blue-500 text-white">
-      Tailwind CSS is working!
-    </div>
-    <ButtonExample/>
+    <CancelButton onClick = {handleCancel}/>
+    <AcceptButton onClick = {handleAcept}/>
+    <PaginationButton rotate={"180"}/>
     <SignInForm />
     <LogInForm/>
     </>
