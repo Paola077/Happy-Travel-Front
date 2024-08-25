@@ -71,3 +71,10 @@ ul, li {
 .text-capitalize {
   text-transform: capitalize;
 }
+
+/* CUSTOMIZING STYLES */
+
+.custom-input::placeholder {
+  color: var(--col-blue); 
+}
+

@@ -6,6 +6,7 @@ import AcceptButton from './components/buttons/AcceptButton'
 import PaginationButton from './components/buttons/PaginationButton'
 import { SignInForm } from './components/signInForm/SignInForm'
 import { LogInForm } from './components/logInForm/LogInForm'
+import CommonInput from './components/inputs/CommonInput'
 
 function App() {
 
@@ -19,8 +20,7 @@ function App() {
   
   return (
     <>
-    <CancelButton onClick = {handleCancel}/>
-    <AcceptButton onClick = {handleAcept}/>
+    
     <PaginationButton rotate={"180"}/>
     <SignInForm />
     <LogInForm/>
