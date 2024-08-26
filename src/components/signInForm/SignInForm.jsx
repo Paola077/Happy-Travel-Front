@@ -1,17 +1,10 @@
-import {
-    //Card,
-    Input,
-    Checkbox,
-    Button,
-    Typography,
-} from "@material-tailwind/react";
+
 import { SIGN_IN_URL } from "../../config/urls";
 import { useState } from "react";
 import { apiRequest } from "../../services/apiRequest";
 import Card from "../card/Card";
 import CommonInput from "../inputs/CommonInput";
-import AcceptButton from "../buttons/AcceptButton";
-import CancelButton from "../buttons/CancelButton";
+import AcceptCancelButtons from "../buttons/AcceptCancelButtons";
 
 export function SignInForm() {
 
@@ -81,10 +74,7 @@ export function SignInForm() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <div className="w-[15.625rem] flex justify-around">
-                        <AcceptButton type="submit" />
-                        <CancelButton />
-                    </div>
+                    <AcceptCancelButtons type="submit"/>
                 </div>
 
                 <p color="gray" className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">

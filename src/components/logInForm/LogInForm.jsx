@@ -70,11 +70,15 @@ export function LogInForm() {
                                     id="login_email"
                                     type="email" 
                                     placeholder="Escribe tu e-mail..."
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                     />
                     <CommonInput    label="Contraseña"
                                     id="login_password"
                                     type="password" 
                                     placeholder="Escribe tu contraseña..."
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="w-[15.625rem] flex justify-around">
                         <AcceptButton type="submit"/>
