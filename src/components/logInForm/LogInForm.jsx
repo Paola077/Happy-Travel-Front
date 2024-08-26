@@ -27,7 +27,8 @@ export function LogInForm() {
         const userData = { email, password };
         const headers = {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         };
 
         try {
@@ -66,12 +67,12 @@ export function LogInForm() {
                 <div className="mb-1 flex flex-col gap-6 items-center">
                     
                     <CommonInput    label="E-Mail"
-                                    id="email"
+                                    id="login_email"
                                     type="email" 
                                     placeholder="Escribe tu e-mail..."
                     />
                     <CommonInput    label="Contraseña"
-                                    id="password"
+                                    id="login_password"
                                     type="password" 
                                     placeholder="Escribe tu contraseña..."
                     />
