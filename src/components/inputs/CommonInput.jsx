@@ -3,9 +3,10 @@ import { forwardRef } from 'react';
 const CommonInput = forwardRef(({
     onClick,
     label,
+    labelClassName,
     id,
     placeholder,
-    type = 'text', // Default to 'text' for backward compatibility
+    type = 'text', 
     divInputClassName,
     inputClassName,
     imgSrc,
@@ -13,13 +14,14 @@ const CommonInput = forwardRef(({
     imgClassName,
     error,
     rows,
+    onInput, 
     ...rest
 }, ref) => {
     return (
         <div className={`w-[18.75rem] flex flex-col ${divInputClassName}`}>
             <label
                 htmlFor={id}
-                className="jaldi-bold text-md text-[color:var(--col-blue)] leading-[2.063rem] w-full"
+                className={`jaldi-bold text-md text-[color:var(--col-blue)] leading-[2.063rem] w-full ${labelClassName}`}
             >
                 {label}
             </label>
@@ -40,6 +42,7 @@ const CommonInput = forwardRef(({
                         placeholder={placeholder}
                         type={type}
                         ref={ref}
+                        onInput={onInput} 
                         {...rest}
                     />
                 )}
@@ -49,6 +52,7 @@ const CommonInput = forwardRef(({
                         alt={imgAlt}
                         className={imgClassName}
                         onClick={onClick}
+                        style={{ pointerEvents: 'none' }}
                     />
                 )}
             </div>
