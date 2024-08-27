@@ -12,10 +12,11 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
     "axios": "^1.7.4",
+    "happy-travel-front": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.26.1",
-    "react-hook-form": "^7.53.0"
+    "react-hook-form": "^7.53.0",
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

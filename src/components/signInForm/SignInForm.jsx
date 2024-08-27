@@ -1,13 +1,25 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import { SIGN_IN_URL } from "../../config/urls";
 import { apiRequest } from "../../services/apiRequest";
 import Card from "../card/Card";
 import CommonInput from "../inputs/CommonInput";
-import AcceptButton from "../buttons/AcceptButton";
-import CancelButton from "../buttons/CancelButton";
+import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
 
-export function SignInForm() {
+
+const SignInForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+
+    const handleCancelButtonClick = () => {
+        navigate('/'); 
+    };
+
+    const handleLoginClick = () => {
+        navigate('/login'); 
+    };
+
 
     const onSubmit = async (data) => {
         const { name, email, password } = data;
@@ -27,6 +39,7 @@ export function SignInForm() {
             const response = await apiRequest(SIGN_IN_URL, "POST", cleanedData, headers);
             console.log("API Response:", response);
             alert("User registered successfully!");
+            navigate('/login');
         } catch (error) {
             console.error("API Error:", error);
             alert(`Error: ${error.message}`);
@@ -34,7 +47,7 @@ export function SignInForm() {
     };
 
     return (
-        <Card className="w-[23.125rem] h-[30.438rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" headerText="Registro de usuario">
+        <Card className="w-[23.125rem] h-[30.438rem] my-[5rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" headerText="Registro de usuario">
             <form className="w-[23.125rem] h-[30.438rem]" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-1 flex flex-col gap-6 items-center">
                     <CommonInput
@@ -80,19 +93,30 @@ export function SignInForm() {
                         })}
                     />
 
-                    <div className="w-[15.625rem] flex justify-around">
-                        <AcceptButton type="submit" />
-                        <CancelButton />
-                    </div>
+                    <AcceptCancelButtons    type="submit" 
+                                            onClickCancel={handleCancelButtonClick}/>
+
+                    
                 </div>
 
-                <p className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">
+                {/* <p className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">
                     ¿Ya tienes cuenta? Accede{" "}
                     <a href="#" className="text-[color:var(--col-green)]">
                         aquí
                     </a>
+                </p> */}
+
+                <p className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">
+                    ¿Ya tienes cuenta? Accede{" "}
+                    <span 
+                        onClick={handleLoginClick} 
+                        className="text-[color:var(--col-green)] cursor-pointer underline">
+                            aquí
+                    </span>
                 </p>
             </form>
         </Card>
     );
 }
+
+export default SignInForm

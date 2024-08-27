@@ -1,14 +1,20 @@
 
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import { LOG_IN_URL } from "../../config/urls";
 import { apiRequest } from "../../services/apiRequest";
 import Card from "../card/Card";
 import CommonInput from "../inputs/CommonInput";
-import AcceptButton from "../buttons/AcceptButton";
-import CancelButton from "../buttons/CancelButton";
+import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
 
-export function LogInForm() {
+const  LogInForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const navigate = useNavigate();
+    const handleCancelButtonClick = () => {
+        navigate('/'); 
+    };
 
     const onSubmit = async (data) => {
         const { email, password } = data;
@@ -31,9 +37,8 @@ export function LogInForm() {
                 localStorage.setItem('authToken', token);
                 alert("Login successful!"); // Success message
                 
-                //REEMPLAZAR LA RUTA QUE SE VA A CARGAR DEPUES DE LOGIN CON EXITO
-                // Redirect to a different page - REPLACEthisuseNavigate 
-                //navigate('/REPLACEthis'); // Redirect using useNavigate
+                //COMPOBAR LA RUTA HOME - QUE SEA PRIVADA
+                navigate('/'); 
             } else {
                 alert("Login failed: No token received.");
             }
@@ -44,7 +49,7 @@ export function LogInForm() {
     };
 
     return (
-        <Card   className="w-[23.125rem] h-[22.375rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" 
+        <Card   className="w-[23.125rem] h-[22.375rem] my-[5rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" 
                 headerText="Acceso de usuario">
 
             <form className="w-[23.125rem] mb-[2.063rem]" onSubmit={handleSubmit(onSubmit)}>
@@ -80,12 +85,12 @@ export function LogInForm() {
                         })}
                     />
                     
-                    <div className="w-[15.625rem] flex justify-around">
-                        <AcceptButton type="submit" />
-                        <CancelButton />
-                    </div>
+                    <AcceptCancelButtons    type="submit" 
+                                            onClickCancel={handleCancelButtonClick}/>
                 </div>
             </form>
         </Card>
     );
 }
+
+export default LogInForm
