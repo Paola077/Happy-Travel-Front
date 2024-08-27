@@ -1,30 +1,21 @@
-import { useState } from 'react'
-
-import './App.css'
-import CancelButton from './components/buttons/CancelButton'
-import AcceptButton from './components/buttons/AcceptButton'
-import PaginationButton from './components/buttons/PaginationButton'
-import { SignInForm } from './components/signInForm/SignInForm'
-import { LogInForm } from './components/logInForm/LogInForm'
-import CommonInput from './components/inputs/CommonInput'
+// import { useState } from 'react'
+import React from 'react';
+import './App.css';
+// import ButtonExample from './components/ButtonExample'
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
 
 function App() {
 
-  const handleCancel = ()  => {
-    alert("Has presionado el botón cancelar.")
-  }
-
-  const handleAcept = ()  => {
-    alert("Has presionado el botón aceptar.")
-  }
-  
   return (
-    <>
+    <React.StrictMode> 
+    <RouterProvider router={router}/>
+    {/* <div className="p-4 bg-blue-500 text-white">
+      Tailwind CSS is working!
+    </div>
+    <ButtonExample/> */}
     
-    <PaginationButton rotate={"180"}/>
-    <SignInForm />
-    <LogInForm/>
-    </>
+    </React.StrictMode> 
   )
 }
 
