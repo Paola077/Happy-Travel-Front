@@ -9,12 +9,7 @@ function App() {
 
   return (
     <React.StrictMode> 
-    <RouterProvider router={router}/>
-    {/* <div className="p-4 bg-blue-500 text-white">
-      Tailwind CSS is working!
-    </div>
-    <ButtonExample/> */}
-    
+      <RouterProvider router={router}/>
     </React.StrictMode> 
   )
 }
