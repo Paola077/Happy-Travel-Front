@@ -1,4 +1,5 @@
 import React from "react";
+import { getUpdateDestinationUrl } from "../config/urls";
 
 export const EditLogged = () => {
     return(

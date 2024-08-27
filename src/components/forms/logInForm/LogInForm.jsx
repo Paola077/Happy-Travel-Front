@@ -2,11 +2,11 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { LOG_IN_URL } from "../../config/urls";
-import { apiRequest } from "../../services/apiRequest";
-import Card from "../card/Card";
-import CommonInput from "../inputs/CommonInput";
-import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
+import { LOG_IN_URL } from "../../../config/urls";
+import { apiRequest } from "../../../services/apiRequest";
+import Card from "../../card/Card";
+import CommonInput from "../../inputs/CommonInput";
+import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
 
 const  LogInForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -35,7 +35,7 @@ const  LogInForm = () => {
             if (token) {
                 // Save the JWT token to localStorage 
                 localStorage.setItem('authToken', token);
-                alert("Login successful!"); // Success message
+                alert("¡Inicio de sesión exitoso!");
                 
                 //COMPOBAR LA RUTA HOME - QUE SEA PRIVADA
                 navigate('/'); 
@@ -62,7 +62,7 @@ const  LogInForm = () => {
                         placeholder="Escribe tu e-mail..."
                         error={errors.email?.message}
                         {...register("email", {
-                            required: "El correo es obligatorio",
+                            required: "Debes escribir un e-mail",
                             pattern: {
                                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                                 message: "Correo electrónico no válido"
@@ -77,7 +77,7 @@ const  LogInForm = () => {
                         placeholder="Escribe tu contraseña..."
                         error={errors.password?.message}
                         {...register("password", {
-                            required: "La contraseña es obligatoria",
+                            required: "Debes escribir una contraseña",
                             minLength: {
                                 value: 8,
                                 message: "La contraseña debe tener al menos 8 caracteres"
