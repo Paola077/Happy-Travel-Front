@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+import  uploadImageToCloudinary from "../../../services/cloudinaryService"; 
 import { apiRequest } from "../../../services/apiRequest";
 import Card from "../../card/Card";
 import CommonInput from "../../inputs/CommonInput";
 import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
 
-const CreateEditForm = ({url}) => {
+const CreateEditForm = ({ url, method, headerText}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const [fileName, setFileName] = useState("Sube una imagen...");
+    const [imageUrl, setImageUrl] = useState(null);
 
-    const handleFileChange = (e) => {
+    const id_user = sessionStorage.getItem('userId');
+
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
-        const maxFileSize = 5 * 1024 * 1024; // 5 MB
-        const allowedTypes = ["image/jpeg", "image/png"];
 
         if (file) {
-            if (!allowedTypes.includes(file.type)) {
-                alert("Only JPG and PNG files are allowed.");
-                e.target.value = ''; // Clear the input if validation fails
+            try {
+                const uploadedImageUrl = await uploadImageToCloudinary(file);
+                setFileName(file.name);
+                setImageUrl(uploadedImageUrl);
+                console.log("Uploaded Image URL:", uploadedImageUrl);
+            } catch (error) {
+                alert(error.message); 
                 setFileName("Sube una imagen...");
-                return;
+                e.target.value = ''; 
             }
-
-            if (file.size > maxFileSize) {
-                alert("File size exceeds the maximum limit of 5 MB.");
-                e.target.value = ''; // Clear the input if validation fails
-                setFileName("Sube una imagen...");
-                return;
-            }
-
-            setFileName(file.name);
         }
     };
 
@@ -41,18 +38,17 @@ const CreateEditForm = ({url}) => {
         navigate('/'); 
     };
 
-    const handleAcceptButtonClick = () => {
-        navigate('/location'); 
-    };
-
     const onSubmit = async (data) => {
-        const { title, location, image, description } = data;
+        const { title, location, description } = data;
         
         const cleanedData = {
-            name: title.trim().toLowerCase(),
+            title: title.trim().toLowerCase(),
             location: location.trim().toLowerCase(), 
-            image: image,
-            description: description
+            url_image: imageUrl, 
+            description: description,
+            user: {
+                id_user: id_user
+            }
         };
 
         const headers = {
@@ -61,10 +57,10 @@ const CreateEditForm = ({url}) => {
         };
 
         try {
-            const response = await apiRequest(url, "POST", cleanedData, headers);
+            const response = await apiRequest(url, method, cleanedData, headers);
             console.log("API Response:", response);
             alert("Nuevo destino creado con éxito!");
-            navigate('/login');
+            navigate('/location');
         } catch (error) {
             console.error("API Error:", error);
             alert(`Error: ${error.message}`);
@@ -72,7 +68,7 @@ const CreateEditForm = ({url}) => {
     };
 
     return (
-        <Card className="w-[45.813rem] h-[31.813rem] my-[5rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" headerText="Crear destino">
+        <Card className="w-[45.813rem] h-[31.813rem] my-[5rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" headerText={headerText}>
             <form className="w-full h-[31.813rem] px-[5%] grid grid-rows-[1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr_1fr] gap-0 h-full" onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="row-start-1 col-start-1 row-end-3 col-end-3 mb-1 flex flex-col gap-8">

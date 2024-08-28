@@ -29,12 +29,17 @@ const  LogInForm = () => {
             const response = await apiRequest(LOG_IN_URL, "POST", userData, headers);
 
             // The response contains the JWT token
-            const { token } = response; // Adjust based on your response structure
+            const { token, id } = response // Adjust based on your response structure
+        
             console.log("API Response:", response);
+            
 
             if (token) {
                 // Save the JWT token to localStorage 
                 localStorage.setItem('authToken', token);
+                const userId = id;
+                sessionStorage.setItem('userId', userId)
+
                 alert("¡Inicio de sesión exitoso!");
                 
                 //COMPOBAR LA RUTA HOME - QUE SEA PRIVADA
