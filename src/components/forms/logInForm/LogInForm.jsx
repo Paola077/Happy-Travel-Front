@@ -2,12 +2,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { LOG_IN_URL } from "../../config/urls";
-import { apiRequest } from "../../services/apiRequest";
-import Card from "../card/Card";
-import CommonInput from "../inputs/CommonInput";
-import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
-import { AuthContext } from "../../auth/AuthWrapper"; 
+import { LOG_IN_URL } from "../../../config/urls";
+import { apiRequest } from "../../../services/apiRequest";
+import Card from "../../card/Card";
+import CommonInput from "../../inputs/CommonInput";
+import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
+import { AuthContext } from "../../../auth/AuthWrapper"; 
 import { useContext } from "react";
 
 
