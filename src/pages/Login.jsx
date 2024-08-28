@@ -1,5 +1,5 @@
 import React from "react";
-import LogInForm from "../components/logInForm/LogInForm"
+import LogInForm from "../components/forms/logInForm/LogInForm"
 import HeaderUser from "../components/header/HeaderUser";
 
 export const Login = () => {
