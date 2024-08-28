@@ -1,10 +1,11 @@
 import React from "react";
+import HeaderUser from "../components/header/HeaderUser";
 
 
 const Home = () => {
     return(
         <>
-            <h1>Home</h1>
+            <HeaderUser />
             
         </>
     )
