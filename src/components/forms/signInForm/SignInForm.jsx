@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { SIGN_IN_URL } from "../../config/urls";
-import { apiRequest } from "../../services/apiRequest";
-import Card from "../card/Card";
-import CommonInput from "../inputs/CommonInput";
-import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
+import { SIGN_IN_URL } from "../../../config/urls";
+import { apiRequest } from "../../../services/apiRequest";
+import Card from "../../card/Card";
+import CommonInput from "../../inputs/CommonInput";
+import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
 
 
 const SignInForm = () => {
@@ -38,7 +38,7 @@ const SignInForm = () => {
         try {
             const response = await apiRequest(SIGN_IN_URL, "POST", cleanedData, headers);
             console.log("API Response:", response);
-            alert("User registered successfully!");
+            alert("Usuario registrado con éxito!");
             navigate('/login');
         } catch (error) {
             console.error("API Error:", error);
@@ -56,7 +56,7 @@ const SignInForm = () => {
                         type="text"
                         placeholder="Escribe tu nombre..."
                         error={errors.name?.message}
-                        {...register("name", { required: "El nombre es obligatorio" })}
+                        {...register("name", { required: "Debes escribir un nombre" })}
                     />
 
                     <CommonInput
@@ -66,7 +66,7 @@ const SignInForm = () => {
                         placeholder="Escribe tu e-mail..."
                         error={errors.email?.message}
                         {...register("email", {
-                            required: "El correo es obligatorio",
+                            required: "Debes escribir un e-mail",
                             pattern: {
                                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                                 message: "Correo electrónico no válido"
@@ -81,7 +81,7 @@ const SignInForm = () => {
                         placeholder="Escribe tu contraseña..."
                         error={errors.password?.message}
                         {...register("password", {
-                            required: "La contraseña es obligatoria",
+                            required: "Debes escribir una contraseña",
                             minLength: {
                                 value: 8,
                                 message: "La contraseña debe tener al menos 8 caracteres"
@@ -98,13 +98,6 @@ const SignInForm = () => {
 
                     
                 </div>
-
-                {/* <p className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">
-                    ¿Ya tienes cuenta? Accede{" "}
-                    <a href="#" className="text-[color:var(--col-green)]">
-                        aquí
-                    </a>
-                </p> */}
 
                 <p className="mt-4 text-center jaldi-bold text-md text-[color:var(--col-blue)]">
                     ¿Ya tienes cuenta? Accede{" "}
