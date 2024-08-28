@@ -2,12 +2,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { LOG_IN_URL } from "../../config/urls";
-import { apiRequest } from "../../services/apiRequest";
-import Card from "../card/Card";
-import CommonInput from "../inputs/CommonInput";
-import AcceptCancelButtons from "../buttons/AcceptCancelButtons"
-import { AuthContext } from "../../auth/AuthWrapper"; 
+import { LOG_IN_URL } from "../../../config/urls";
+import { apiRequest } from "../../../services/apiRequest";
+import Card from "../../card/Card";
+import CommonInput from "../../inputs/CommonInput";
+import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
+import { AuthContext } from "../../../auth/AuthWrapper"; 
 import { useContext } from "react";
 
 
@@ -31,7 +31,7 @@ const  LogInForm = () => {
             const response = await apiRequest(LOG_IN_URL, "POST", userData, headers);
     
             // La respuesta contiene el token JWT
-            const { token, ...user } = response;  // Extrae el token y el resto del usuario
+            const { token, id, ...user } = response;  // Extrae el token y el resto del usuario
             console.log("API Response:", response);
     
             if (token) {
@@ -39,6 +39,9 @@ const  LogInForm = () => {
                 const cleanedToken = token.startsWith('Bearer ') ? token.slice(7) : token;
                 // Guarda el token limpio en localStorage
                 login(user, cleanedToken);
+                //Guarda el user Id en sessionStorage
+                const userId = id;
+                sessionStorage.setItem('userId', userId);
                 alert("Login successful!"); // Mensaje de éxito
     
                 navigate('/'); // Navega a la ruta deseada
@@ -66,7 +69,7 @@ const  LogInForm = () => {
                         placeholder="Escribe tu e-mail..."
                         error={errors.email?.message}
                         {...register("email", {
-                            required: "El correo es obligatorio",
+                            required: "Debes escribir un e-mail",
                             pattern: {
                                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                                 message: "Correo electrónico no válido"
@@ -81,7 +84,7 @@ const  LogInForm = () => {
                         placeholder="Escribe tu contraseña..."
                         error={errors.password?.message}
                         {...register("password", {
-                            required: "La contraseña es obligatoria",
+                            required: "Debes escribir una contraseña",
                             minLength: {
                                 value: 8,
                                 message: "La contraseña debe tener al menos 8 caracteres"
