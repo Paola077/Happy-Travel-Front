@@ -8,7 +8,10 @@ const CancelButton = ({onClick, type}) => {
                     bgColor="bg-[color:var(--col-red)]"
                     ariaLabel="botón para cancelar la acción"
                     onClick={onClick}
-                    type={type}/>
+                    type={type}
+                    className="ml-[0.625rem]"
+                    />
+
     </>
     
     )
