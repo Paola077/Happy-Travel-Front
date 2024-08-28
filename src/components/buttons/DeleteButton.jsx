@@ -1,10 +1,19 @@
-import Delete from "../../../public/assets/Delete-icon.svg"
+import Delete from "../../../public/assets/Delete-icon.svg";
+import { useNavigate } from "react-router-dom";
 function DeleteButton() {
-    return(
-        <>
-        <img src={Delete}  className="h-8 w-8"/>
-        </>
-    )
-    
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/edit"); // Cambiar por un ALERT
+  };
+  return (
+    <>
+      <img
+        src={Delete}
+        className="h-8 w-8 cursor-pointer"
+        onClick={handleClick}
+      />
+    </>
+  );
 }
 export default DeleteButton;
