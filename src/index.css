@@ -72,9 +72,16 @@ ul, li {
   text-transform: capitalize;
 }
 
-/* CUSTOMIZING STYLES */
+/* CUSTOMIZING INPUT */
 
 .custom-input::placeholder {
   color: var(--col-blue); 
+}
+
+.custom-input {
+  box-sizing: border-box; 
+  padding-left: 1rem; 
+  text-align: justify; 
+  resize: none; 
 }
 
