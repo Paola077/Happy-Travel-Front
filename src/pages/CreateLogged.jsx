@@ -7,6 +7,7 @@ import HeaderUser from "../components/header/HeaderUser";
 
 export const CreateLogged = () => {
     return(
+        
         <div className="w-[full] h-auto">
             <HeaderUser/>
             <main className="w-full h-auto flex justify-center items-center">
