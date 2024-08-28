@@ -1,10 +1,24 @@
 /* import Delete from "../../../public/assets/Delete-icon.svg";
 import { useNavigate } from "react-router-dom";
-function DeleteButton() {
-  const navigate = useNavigate();
+import { apiRequest } from "../../services/apiRequest";
+import { getDeleteDestinationUrl } from "../../config/urls";
 
-  const handleClick = () => {
-    navigate("/edit"); // Cambiar por un ALERT
+function DeleteButton({destinationId}) {
+  const navigate = useNavigate();
+  
+  const handleClick = async () => {
+    const confirmDelete = window.confirm("¿Quieres eliminar este destino?");
+    
+    if(confirmDelete){
+      try{
+        await apiRequest(getDeleteDestinationUrl(destinationId), "DELETE")
+        alert('Destino eliminado con éxito');
+        navigate("/")
+      } catch (error){
+        console.error("Error al eliminar el destino:", error);
+        alert("Hubo un error al eliminar el destino.");
+      }
+    }
   };
   return (
     <>
