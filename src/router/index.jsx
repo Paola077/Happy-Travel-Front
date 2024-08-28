@@ -6,6 +6,7 @@ import {SignIn} from "../pages/SignIn";
 import {LocationLogged} from "../pages/LocationLogged";
 import {CreateLogged} from "../pages/CreateLogged";
 import {EditLogged} from "../pages/EditLogged";
+import PrivateRoute from "./PrivateRoutes";
 
 export const router = createBrowserRouter ([
     {
@@ -22,14 +23,23 @@ export const router = createBrowserRouter ([
     },
     {
         path: "location",
-        element: <LocationLogged />
+        element: (
+            <PrivateRoute>
+                <LocationLogged />
+            </PrivateRoute>)
     },
     {
         path: "create",
-        element: <CreateLogged />
+        element: (
+            <PrivateRoute>
+                <CreateLogged />
+            </PrivateRoute>)
     },
     {
         path: "edit",
-        element: <EditLogged />
+        element: (
+            <PrivateRoute>
+                <EditLogged />
+            </PrivateRoute>)
     },
 ])
