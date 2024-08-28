@@ -8,7 +8,7 @@ function InfoButton() {
     return(
         <>
         <img src={Info}
-          className="h-8 w-8 cursor-pointer" 
+          className="h[3.125rem] w[3.125rem] cursor-pointer" 
             alt="Info" 
             onClick={handleClick}/>
         </>

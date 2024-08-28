@@ -10,7 +10,7 @@ function EditButton() {
     <>
       <img
         src={Edit}
-        className="h-8 w-8 cursor-pointer"
+        className="h-[2.5rem] w-[2.5rem] cursor-pointer"
         alt="Edit"
         onClick={handleClick}
       />

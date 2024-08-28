@@ -10,7 +10,7 @@ function DeleteButton() {
     <>
       <img
         src={Delete}
-        className="h-8 w-8 cursor-pointer"
+        className="h-[2.5rem] w-[1.917rem] cursor-pointer"
         onClick={handleClick}
       />
     </>
