@@ -1,10 +1,11 @@
 import React from "react";
+import HeaderUser from "../components/header/HeaderUser";
 
 
 export const CreateLogged = () => {
     return(
         <>
-            <h1>Create</h1>
+            <HeaderUser/>
         </>
     )
 }

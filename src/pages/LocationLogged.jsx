@@ -1,9 +1,10 @@
 import React from "react";
+import HeaderUser from "../components/header/HeaderUser";
 
 export const LocationLogged = () => {
     return(
         <>
-            <h1>Location</h1>
+            <HeaderUser />
         </>
     )
 }
