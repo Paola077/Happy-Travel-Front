@@ -15,7 +15,7 @@ const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
     const [fileName, setFileName] = useState("Sube una imagen...");
     const [imageUrl, setImageUrl] = useState(null);
 
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
