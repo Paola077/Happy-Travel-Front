@@ -4,12 +4,14 @@ import DestinationCardUser from "../components/card/DestinationCardUser";
 import { GET_DESTINATIONS_URL, GET_DESTINATIONS_NO_AUTH_URL } from "../config/urls";
 import { apiRequest } from "../services/apiRequest";
 import { AuthContext } from "../auth/AuthWrapper";
-
+import Pagination from "../components/pagination/Pagination";
 
 const Home = () => {
-    const [destinations, setDestinations] = useState([]); 
-    const { authToken} = useContext(AuthContext);
-    
+    const [destinations, setDestinations] = useState([]);
+    const { authToken, user } = useContext(AuthContext);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
+
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
@@ -18,26 +20,48 @@ const Home = () => {
 
                 const data = await apiRequest(url, 'GET', null, headers);
                 console.log("Fetched Destinations:", data);
-                setDestinations(data);
-                } catch (error) {
-                    console.error('Error al obtener los destinos: ', error);
-                }
+
+                const loggedUserId = localStorage.getItem("userId");
+
+                // Separate destinations into those created by the logged-in user and others
+                const userDestinations = data.filter(destination => destination.user.id.toString() === loggedUserId);
+                const otherDestinations = data.filter(destination => destination.user.id.toString() !== loggedUserId);
+
+                // Combine with user's destinations first
+                const sortedDestinations = [...userDestinations, ...otherDestinations];
+
+                setDestinations(sortedDestinations);
+            } catch (error) {
+                console.error('Error al obtener los destinos: ', error);
+            }
         };
         fetchDestinations();
     }, [authToken]);
 
+    // Calculate the slice of destinations to display
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentDestinations = destinations.slice(startIndex, startIndex + itemsPerPage);
+
     return (
-        <>
+        <div className="w-full h-auto">
             <HeaderUser />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {destinations.map((destination) => (
-                    <DestinationCardUser
-                        key={destination.id}
-                        destination={destination}
-                    />
-                ))}
+            <div className="w-full flex flex-col justify-center">
+                <div className="mx-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {currentDestinations.map((destination) => (
+                        <DestinationCardUser
+                            key={destination.id}
+                            destination={destination}
+                        />
+                    ))}
+                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalItems={destinations.length}
+                    itemsPerPage={itemsPerPage}
+                    onPageChange={setCurrentPage}
+                />
             </div>
-        </>
+        </div>
     );
 }
 
