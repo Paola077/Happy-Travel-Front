@@ -12,7 +12,7 @@ function DestinationCardUser({ destination, currentUser }) {
 
     return (
         <div className="bg-yellow-100 w-[18.75rem] h-[23.313rem] rounded-[1.25rem] shadow-lg overflow-hidden relative">
-            <img src={destination.url_image} alt={destination.title} className="w-full h-[18.75rem] rounded-[1.25rem] object-cover" />
+            <img src={destination.urlImage} alt={destination.title} className="w-full h-[18.75rem] rounded-[1.25rem] object-cover" />
             {isAuthenticated && (
                 <div className="absolute top-2 right-2">
                     <InfoButton />
