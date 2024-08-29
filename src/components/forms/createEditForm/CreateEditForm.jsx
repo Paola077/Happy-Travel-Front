@@ -8,14 +8,14 @@ import Card from "../../card/Card";
 import CommonInput from "../../inputs/CommonInput";
 import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
 
-const CreateEditForm = ({ url, method, headerText}) => {
+const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const [fileName, setFileName] = useState("Sube una imagen...");
     const [imageUrl, setImageUrl] = useState(null);
 
-    const id_user = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
@@ -25,7 +25,6 @@ const CreateEditForm = ({ url, method, headerText}) => {
                 const uploadedImageUrl = await uploadImageToCloudinary(file);
                 setFileName(file.name);
                 setImageUrl(uploadedImageUrl);
-                console.log("Uploaded Image URL:", uploadedImageUrl);
             } catch (error) {
                 alert(error.message); 
                 setFileName("Sube una imagen...");
@@ -42,28 +41,31 @@ const CreateEditForm = ({ url, method, headerText}) => {
         const { title, location, description } = data;
         
         const cleanedData = {
-            title: title.trim().toLowerCase(),
-            location: location.trim().toLowerCase(), 
+            title: title.trim(),
+            location: location.trim(), 
             url_image: imageUrl, 
             description: description,
             user: {
-                id_user: id_user
+                id: userId
             }
         };
 
+        const token = localStorage.getItem('authToken')
+        
         const headers = {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
         };
 
         try {
             const response = await apiRequest(url, method, cleanedData, headers);
             console.log("API Response:", response);
-            alert("Nuevo destino creado con éxito!");
+            alert(succesAlertMessage);
             navigate('/location');
         } catch (error) {
             console.error("API Error:", error);
-            alert(`Error: ${error.message}`);
+            alert(`Error: ${error.response?.data?.message || error.message}`);
         }
     };
 
@@ -131,8 +133,8 @@ const CreateEditForm = ({ url, method, headerText}) => {
                         divInputClassName="h-[25.313rem]" 
                         inputClassName="w-full overflow-auto" 
                         rows={13} 
-                        error={errors.password?.message}
-                        {...register("password", {
+                        error={errors.description?.message}
+                        {...register("description", {
                             required: "Debes escribir una descripción",
                             maxLength: {
                                 value: 500,
