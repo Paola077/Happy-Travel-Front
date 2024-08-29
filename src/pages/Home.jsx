@@ -34,7 +34,6 @@ const Home = () => {
                     <DestinationCardUser
                         key={destination.id}
                         destination={destination}
-                        currentUser={user} // Asegúrate de que `user` es el usuario actual
                     />
                 ))}
             </div>

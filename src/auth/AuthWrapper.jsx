@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         console.log("Updated User Data:", updatedUserData);
         setUser(updatedUserData);
         setAuthToken(token);
+        sessionStorage.setItem('userId', updatedUserData.id);
         localStorage.setItem('user', JSON.stringify(updatedUserData));
         localStorage.setItem('authToken', token);
     };
