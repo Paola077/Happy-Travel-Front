@@ -18,7 +18,7 @@ const CreateEditForm = ({ url, method, headerText}) => {
     const [isModalOpen, setModalOpen] = useState(false); // Estado para el modal
     const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
 
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
