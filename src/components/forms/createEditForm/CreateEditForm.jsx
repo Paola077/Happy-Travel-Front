@@ -76,7 +76,7 @@ const CreateEditForm = ({ url, method, headerText}) => {
     };
     const handleConfirm = () => {
         setModalOpen(false);  
-        navigate('/location');  
+        navigate("/");
     };
 
 

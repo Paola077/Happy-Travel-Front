@@ -3,7 +3,7 @@ import EditButton from "../buttons/EditButton";
 import InfoButton from "../buttons/InfoButton";
 
 
-function DestinationCardUser({ destination, currentUser }) {
+function DestinationCardUser({ destination, currentUser, onDelete }) {
     const userId = localStorage.getItem('userId'); 
     const isAuthenticated = !!currentUser;
     const isCreator = currentUser && destination.user && destination.user.id.toString() === userId;
@@ -29,7 +29,7 @@ function DestinationCardUser({ destination, currentUser }) {
                 {isCreator && ( 
                     <div className="w-[5.063rem] h-[2.50rem] flex justify-between">
                         <EditButton />
-                        <DeleteButton />
+                        <DeleteButton destinationId={destination.id} onDelete={onDelete}/>
                     </div>
                 )}
             </div>
