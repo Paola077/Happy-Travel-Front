@@ -15,8 +15,8 @@ const CreateEditForm = ({ url, method, headerText}) => {
 
     const [fileName, setFileName] = useState("Sube una imagen...");
     const [imageUrl, setImageUrl] = useState(null);
-    const [isModalOpen, setModalOpen] = useState(false); // Estado para el modal
-    const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+    const [isModalOpen, setModalOpen] = useState(false); 
+    const [successMessage, setSuccessMessage] = useState(""); 
 
     const userId = localStorage.getItem('userId');
 
@@ -64,7 +64,10 @@ const CreateEditForm = ({ url, method, headerText}) => {
         try {
             const response = await apiRequest(url, method, cleanedData, headers);
             console.log("API Response:", response);
-            setSuccessMessage("Nuevo destino creado con éxito!");
+            const successMessage = method === 'POST' 
+            ? "¡Nuevo destino creado con éxito!"
+            : "¡Destino editado con éxito!";
+            setSuccessMessage(successMessage);
             setModalOpen(true);
         } catch (error) {
             console.error("API Error:", error);
@@ -72,8 +75,8 @@ const CreateEditForm = ({ url, method, headerText}) => {
         }
     };
     const handleConfirm = () => {
-        setModalOpen(false);  // Cierra el modal
-        navigate('/location');  // Redirige después de confirmar
+        setModalOpen(false);  
+        navigate('/location');  
     };
 
 
