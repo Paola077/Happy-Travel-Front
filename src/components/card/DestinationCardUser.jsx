@@ -1,17 +1,14 @@
 import DeleteButton from "../buttons/DeleteButton";
 import EditButton from "../buttons/EditButton";
 import InfoButton from "../buttons/InfoButton";
-import { useContext } from "react";
-import { AuthContext } from "../../auth/AuthWrapper";
+
 
 function DestinationCardUser({ destination, currentUser }) {
     const userId = sessionStorage.getItem('userId');
     const isAuthenticated = !!currentUser;
     const isCreator = userId && destination.user && destination.user.id === parseInt(userId, 10);
 
-    console.log("Is Creator:", isCreator);
-    console.log("Destination Creator ID:", destination.user?.id);
-    console.log("Current User ID:", currentUser?.id);
+
 
     return (
         <div className="bg-yellow-100 w-[18.75rem] h-[23.313rem] rounded-[1.25rem] shadow-lg overflow-hidden relative">

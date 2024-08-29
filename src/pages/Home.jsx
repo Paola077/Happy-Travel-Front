@@ -1,27 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import HeaderUser from "../components/header/HeaderUser";
 import DestinationCardUser from "../components/card/DestinationCardUser";
-import { GET_DESTINATIONS_URL } from "../config/urls";
+import { GET_DESTINATIONS_URL, GET_DESTINATIONS_NO_AUTH_URL } from "../config/urls";
 import { apiRequest } from "../services/apiRequest";
 import { AuthContext } from "../auth/AuthWrapper";
 
 
 const Home = () => {
-    const [destinations, setDestinations] = useState([]); // Cambiado a plural
-    const { authToken, user } = useContext(AuthContext);
-    console.log("Current User in home:", user);
-
+    const [destinations, setDestinations] = useState([]); 
+    const { authToken} = useContext(AuthContext);
+    
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
+                const url = authToken ? GET_DESTINATIONS_URL : GET_DESTINATIONS_NO_AUTH_URL;
                 const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
-                console.log("Headers:", headers);
-                const data = await apiRequest(GET_DESTINATIONS_URL, 'GET', null, headers);
+
+                const data = await apiRequest(url, 'GET', null, headers);
                 console.log("Fetched Destinations:", data);
-                setDestinations(data); // Cambiado a plural
-            } catch (error) {
-                console.error('Error al obtener los destinos: ', error);
-            }
+                setDestinations(data);
+                } catch (error) {
+                    console.error('Error al obtener los destinos: ', error);
+                }
         };
         fetchDestinations();
     }, [authToken]);

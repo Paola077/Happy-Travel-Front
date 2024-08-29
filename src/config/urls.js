@@ -4,7 +4,7 @@ export const BASE_URL = "http://localhost:3001";
 export const PUBLIC_URL = `${BASE_URL}/auth`;
 export const SIGN_IN_URL = `${PUBLIC_URL}/sign_in`;
 export const LOG_IN_URL = `${PUBLIC_URL}/log_in`;
-export const GET_DESTINATIONS_NO_AUTH_URL = `${PUBLIC_URL}destinations`;
+export const GET_DESTINATIONS_NO_AUTH_URL = `${PUBLIC_URL}/destinations/location`;
 
 
 // Protected endpoints
