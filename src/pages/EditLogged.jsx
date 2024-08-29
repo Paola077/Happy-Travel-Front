@@ -16,7 +16,7 @@ export const EditLogged = () => {
         <div className="w-full h-auto">
             <HeaderUser/>
             <main className="w-full h-auto flex justify-center items-center">
-                <CreateEditForm url={updateUrl} method="PUT" headerText="Editar destino"/>
+                <CreateEditForm url={updateUrl} method="PUT" headerText="Editar destino" succesAlertMessage="Destino editado con éxito!"/>
             </main>
         </div>
     );
