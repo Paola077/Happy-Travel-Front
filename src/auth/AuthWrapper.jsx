@@ -18,12 +18,13 @@ export const AuthProvider = ({ children }) => {
         
         const updatedUserData = {
             ...userData,
-            id: userData.id || userData.roles?.[0]?.id 
+            id: userData.id
+            //|| userData.roles?.[0]?.id 
         };
 
         setUser(updatedUserData);
         setAuthToken(token);
-        sessionStorage.setItem('userId', updatedUserData.id);
+        localStorage.setItem('userId', updatedUserData.id); 
         localStorage.setItem('user', JSON.stringify(updatedUserData));
         localStorage.setItem('authToken', token);
     };
@@ -33,7 +34,8 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(null);
         localStorage.removeItem('user');
         localStorage.removeItem('authToken');
-        localStorage.removeItem('userId')
+        localStorage.removeItem('userId');
+        // sessionStorage.removeItem('userId')
     }
 
     return (
