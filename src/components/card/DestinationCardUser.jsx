@@ -4,11 +4,12 @@ import InfoButton from "../buttons/InfoButton";
 
 
 function DestinationCardUser({ destination, currentUser }) {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId'); 
     const isAuthenticated = !!currentUser;
-    const isCreator = userId && destination.user && destination.user.id === parseInt(userId, 10);
+    const isCreator = currentUser && destination.user && destination.user.id.toString() === userId;
 
-
+    console.log('currentUser:', currentUser);
+    console.log('destination user:', destination.user);
 
     return (
         <div className="bg-yellow-100 w-[18.75rem] h-[23.313rem] rounded-[1.25rem] shadow-lg overflow-hidden relative">

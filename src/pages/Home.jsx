@@ -22,13 +22,13 @@ const Home = () => {
             <HeaderUser />
             <div className="w-full flex flex-col justify-center">
                 <div className="mx-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {currentDestinations.map((destination) => (
-                    <DestinationCardUser
-                    key={destination.id}
-                    destination={destination}
-                    currentUser={user}
-                    />
-                ))}
+                    {currentDestinations.map((destination) => (
+                        <DestinationCardUser
+                            key={destination.id}
+                            destination={destination}
+                            currentUser={user}
+                        />
+                    ))}
                 </div>
                 <Pagination
                     currentPage={currentPage}
