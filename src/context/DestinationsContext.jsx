@@ -62,7 +62,7 @@ export const DestinationsProvider = ({ children }) => {
     };
 
     return (
-        <DestinationsContext.Provider value={{ filteredDestinations, filterDestinations, refreshDestinations }}>
+        <DestinationsContext.Provider value={{ filteredDestinations, setFilteredDestinations, filterDestinations, refreshDestinations }}>
             {children}
         </DestinationsContext.Provider>
     );

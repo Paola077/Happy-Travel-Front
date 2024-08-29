@@ -5,8 +5,10 @@ import ConfirmModal from '../modal/ConfirmModal';
 import { apiRequest } from "../../services/apiRequest";
 import { getDeleteDestinationUrl } from "../../config/urls";
 
-function DeleteButton({ destinationId }) {
+function DeleteButton({ destinationId, onDelete }) {
+
   const [isModalOpen, setModalOpen] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleDelete = () => {
@@ -17,12 +19,12 @@ function DeleteButton({ destinationId }) {
     setModalOpen(false);
 
     try {
-      await apiRequest(getDeleteDestinationUrl(destinationId), "DELETE");
-      alert('Destino eliminado con éxito');
-      navigate("/");  
+
+      onDelete(destinationId);
+
+      //navigate("/");  
     } catch (error) {
       console.error("Error al eliminar el destino:", error);
-      alert("Hubo un error al eliminar el destino.");
     }
   };
 
@@ -39,8 +41,9 @@ function DeleteButton({ destinationId }) {
       />
       <ConfirmModal 
         isOpen={isModalOpen} 
-        onClose={handleCancel}  
+        message={"¿Quieres eliminar este destino?"}
         onConfirm={handleConfirm}  
+        onClose={handleCancel}  
       />
     </>
   );
