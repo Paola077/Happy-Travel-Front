@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { DestinationsContext } from '../../../context/DestinationsContext';
 
 import  uploadImageToCloudinary from "../../../services/cloudinaryService"; 
 import { apiRequest } from "../../../services/apiRequest";
@@ -14,6 +15,8 @@ const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
 
     const [fileName, setFileName] = useState("Sube una imagen...");
     const [imageUrl, setImageUrl] = useState(null);
+
+    const { refreshDestinations } = useContext(DestinationsContext);
 
     const userId = localStorage.getItem('userId');
 
@@ -62,6 +65,7 @@ const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
             const response = await apiRequest(url, method, cleanedData, headers);
             console.log("API Response:", response);
             alert(succesAlertMessage);
+            await refreshDestinations();
             navigate('/location');
         } catch (error) {
             console.error("API Error:", error);
