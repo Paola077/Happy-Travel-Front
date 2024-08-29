@@ -36,7 +36,7 @@ export const router = createBrowserRouter ([
             </PrivateRoute>)
     },
     {
-        path: "edit",
+        path: "edit/:id",
         element: (
             <PrivateRoute>
                 <EditLogged />

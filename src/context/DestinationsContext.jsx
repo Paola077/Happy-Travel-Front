@@ -12,38 +12,42 @@ export const DestinationsProvider = ({ children }) => {
     const [destinations, setDestinations] = useState([]);
     const [filteredDestinations, setFilteredDestinations] = useState([]);
 
-    useEffect(() => {
-        const fetchDestinations = async () => {
-            try {
-                const url = authToken ? GET_DESTINATIONS_URL : GET_DESTINATIONS_NO_AUTH_URL;
+    // Function to fetch destinations
+    const fetchDestinations = async () => {
+        try {
+            const url = authToken ? GET_DESTINATIONS_URL : GET_DESTINATIONS_NO_AUTH_URL;
+            const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
+            const data = await apiRequest(url, 'GET', null, headers);
 
-                const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
+            let sortedDestinations = [];
 
-                const data = await apiRequest(url, 'GET', null, headers);
-
-                let sortedDestinations = [];
-
-                if (authToken) {
-                    
-                    const loggedUserId = parseInt(localStorage.getItem("userId"), 10);
-                    const userDestinations = data.filter(destination => destination.user.id === loggedUserId);
-                    const otherDestinations = data.filter(destination => destination.user.id !== loggedUserId);
-                    sortedDestinations = [...userDestinations, ...otherDestinations];
-                } else {
-                    
-                    sortedDestinations = data;
-                }
-                
-                setDestinations(sortedDestinations);
-                setFilteredDestinations(sortedDestinations);
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
+            if (authToken) {
+                const loggedUserId = parseInt(localStorage.getItem("userId"), 10);
+                const userDestinations = data.filter(destination => destination.user.id === loggedUserId);
+                const otherDestinations = data.filter(destination => destination.user.id !== loggedUserId);
+                sortedDestinations = [...userDestinations, ...otherDestinations];
+            } else {
+                sortedDestinations = data;
             }
-        };
 
+            setDestinations(sortedDestinations);
+            setFilteredDestinations(sortedDestinations);
+        } catch (error) {
+            console.error('Error fetching destinations:', error);
+        }
+    };
+
+    // Initial fetch of destinations
+    useEffect(() => {
         fetchDestinations();
     }, [authToken]);
 
+    // Method to refresh destinations
+    const refreshDestinations = async () => {
+        await fetchDestinations();
+    };
+
+    // Method to filter destinations based on a query
     const filterDestinations = (query) => {
         if (!query) {
             setFilteredDestinations(destinations);
@@ -58,7 +62,7 @@ export const DestinationsProvider = ({ children }) => {
     };
 
     return (
-        <DestinationsContext.Provider value={{ filteredDestinations, filterDestinations }}>
+        <DestinationsContext.Provider value={{ filteredDestinations, filterDestinations, refreshDestinations }}>
             {children}
         </DestinationsContext.Provider>
     );

@@ -25,6 +25,7 @@ const Home = () => {
                     {currentDestinations.map((destination) => (
                         <DestinationCardUser
                             key={destination.id}
+                            {...sessionStorage.setItem("destinationId", destination.id)}
                             destination={destination}
                             currentUser={user}
                         />
