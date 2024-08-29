@@ -1,12 +1,14 @@
 import DeleteButton from "../buttons/DeleteButton";
 import EditButton from "../buttons/EditButton";
 import InfoButton from "../buttons/InfoButton";
-import { useContext } from "react";
-import { AuthContext } from "../../auth/AuthWrapper";
+
 
 function DestinationCardUser({ destination, currentUser }) {
+    const userId = sessionStorage.getItem('userId');
     const isAuthenticated = !!currentUser;
-    const isCreator = currentUser && destination.user && destination.user.id === currentUser.id;
+    const isCreator = userId && destination.user && destination.user.id === parseInt(userId, 10);
+
+
 
     return (
         <div className="bg-yellow-100 w-[18.75rem] h-[23.313rem] rounded-[1.25rem] shadow-lg overflow-hidden relative">
@@ -23,7 +25,7 @@ function DestinationCardUser({ destination, currentUser }) {
                         <p className="text-sm text-blue-600">{destination.location}</p>
                     </div>
                 </div>
-                {isCreator && (  // Solo mostramos los botones si es el creador
+                {isCreator && ( 
                     <div className="w-[5.063rem] h-[2.50rem] flex justify-between">
                         <EditButton />
                         <DeleteButton />
