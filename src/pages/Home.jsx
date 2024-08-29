@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
+import { AuthContext } from "../auth/AuthWrapper";
+
 import DestinationCardUser from "../components/card/DestinationCardUser";
 import Pagination from "../components/pagination/Pagination";
 import HeaderUser from "../components/header/HeaderUser";
@@ -8,6 +10,7 @@ const Home = () => {
     const { filteredDestinations } = useContext(DestinationsContext);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
+    const { user } = useContext(AuthContext);
 
     const currentDestinations = filteredDestinations.slice(
         (currentPage - 1) * itemsPerPage,
@@ -23,6 +26,7 @@ const Home = () => {
                     <DestinationCardUser
                     key={destination.id}
                     destination={destination}
+                    currentUser={user}
                     />
                 ))}
                 </div>
