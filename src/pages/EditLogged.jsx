@@ -5,19 +5,23 @@ import CreateEditForm from "../components/forms/createEditForm/CreateEditForm";
 import HeaderUser from "../components/header/HeaderUser";
 
 export const EditLogged = () => {
+    const { id } = useParams(); 
+    console.log(id); 
 
-    //DESCOMENTAR Y COMPROBAR QUE RECIBE EL ID DEL DESTINO
-    //const { id } = useParams(); // Extract the destination ID from the URL parameters
-
-    const id = 1;
-    const updateUrl = getUpdateDestinationUrl(id); // Generate the update URL with the destination ID
+    const updateUrl = getUpdateDestinationUrl(id); 
+    console.log(updateUrl)
 
     return (
         <div className="w-full h-auto">
-            <HeaderUser/>
-            <main className="w-full h-auto flex justify-center items-center">
-                <CreateEditForm url={updateUrl} method="PUT" headerText="Editar destino" succesAlertMessage="Destino editado con éxito!"/>
-            </main>
+        <HeaderUser />
+        <main className="w-full h-auto flex justify-center items-center">
+            <CreateEditForm
+            url={updateUrl}
+            method="PUT"
+            headerText="Editar destino"
+            succesAlertMessage="Destino editado con éxito!"
+            />
+        </main>
         </div>
     );
 };
