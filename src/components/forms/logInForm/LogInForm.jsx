@@ -41,7 +41,7 @@ const  LogInForm = () => {
                 login(user, cleanedToken);
                 //Guarda el user Id en sessionStorage
                 const userId = id;
-                sessionStorage.setItem('userId', userId);
+                localStorage.setItem('userId', userId);
                 alert("Login successful!"); // Mensaje de éxito
     
                 navigate('/'); // Navega a la ruta deseada
