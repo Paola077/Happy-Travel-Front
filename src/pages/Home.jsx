@@ -18,7 +18,17 @@ const Home = () => {
                 const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
                 const data = await apiRequest(GET_DESTINATIONS_URL, 'GET', null, headers);
                 console.log("Fetched Destinations:", data);
-                setDestinations(data);
+
+                const loggedUserId = localStorage.getItem("userId");
+
+                // Separate destinations into those created by the logged-in user and others
+                const userDestinations = data.filter(destination => destination.user.id.toString() === loggedUserId);
+                const otherDestinations = data.filter(destination => destination.user.id.toString() !== loggedUserId);
+
+                // Combine with user's destinations first
+                const sortedDestinations = [...userDestinations, ...otherDestinations];
+
+                setDestinations(sortedDestinations);
             } catch (error) {
                 console.error('Error al obtener los destinos: ', error);
             }
