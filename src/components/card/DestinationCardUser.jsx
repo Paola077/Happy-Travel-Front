@@ -8,9 +8,6 @@ function DestinationCardUser({ destination, currentUser, onDelete }) {
     const isAuthenticated = !!currentUser;
     const isCreator = currentUser && destination.user && destination.user.id.toString() === userId;
 
-    console.log('currentUser:', currentUser);
-    console.log('destination user:', destination.user);
-
     return (
         <div className="bg-yellow-100 w-[18.75rem] h-[23.313rem] rounded-[1.25rem] shadow-lg overflow-hidden relative">
             <img src={destination.urlImage} alt={destination.title} className="w-full h-[18.75rem] rounded-[1.25rem] object-cover" />

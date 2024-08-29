@@ -11,7 +11,7 @@ export const GET_DESTINATIONS_NO_AUTH_URL = `${PUBLIC_URL}/destinations/location
 export const PROTECTED_URL = `${BASE_URL}/api`;
 export const GET_DESTINATIONS_URL = `${PROTECTED_URL}/destinations/location`;
 export const ADD_DESTINATION_URL = `${PROTECTED_URL}/destinations/add`;
-export const getUpdateDestinationUrl = (id) => `${PROTECTED_URL}/destinations/update/`;
+export const getUpdateDestinationUrl = (id) => `${PROTECTED_URL}/destinations/update/${id}`;
 export const getDeleteDestinationUrl = (id) => `${PROTECTED_URL}/destinations/delete/${id}`;
 export const getDestinationDetailsUrl = (id) => `${PROTECTED_URL}/destinations/details/${id}`;
 

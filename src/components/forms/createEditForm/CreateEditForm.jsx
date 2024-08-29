@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { DestinationsContext } from '../../../context/DestinationsContext';
 
 import  uploadImageToCloudinary from "../../../services/cloudinaryService"; 
 import { apiRequest } from "../../../services/apiRequest";
@@ -17,6 +18,8 @@ const CreateEditForm = ({ url, method, headerText}) => {
     const [imageUrl, setImageUrl] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false); 
     const [successMessage, setSuccessMessage] = useState(""); 
+
+    const { refreshDestinations } = useContext(DestinationsContext);
 
     const userId = localStorage.getItem('userId');
 
@@ -68,6 +71,7 @@ const CreateEditForm = ({ url, method, headerText}) => {
             ? "¡Nuevo destino creado con éxito!"
             : "¡Destino editado con éxito!";
             setSuccessMessage(successMessage);
+            await refreshDestinations();
             setModalOpen(true);
         } catch (error) {
             console.error("API Error:", error);
