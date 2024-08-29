@@ -7,40 +7,39 @@ import { AuthContext } from "../auth/AuthWrapper";
 
 
 const Home = () => {
-    const [destinations, setDestinations] = useState([]);
-    const {authToken} = useContext(AuthContext);
+    const [destinations, setDestinations] = useState([]); // Cambiado a plural
+    const { authToken, user } = useContext(AuthContext);
+    console.log("Current User in home:", user);
 
-    console.log("Auth Token:", authToken);
-
-
-    useEffect(()=>{
-        const fetchDestinations  = async () => {
-            try{
+    useEffect(() => {
+        const fetchDestinations = async () => {
+            try {
                 const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
                 console.log("Headers:", headers);
                 const data = await apiRequest(GET_DESTINATIONS_URL, 'GET', null, headers);
-                setDestinations(data)
-            }catch (error) {
+                console.log("Fetched Destinations:", data);
+                setDestinations(data); // Cambiado a plural
+            } catch (error) {
                 console.error('Error al obtener los destinos: ', error);
             }
         };
-        fetchDestinations ();
+        fetchDestinations();
     }, [authToken]);
-    return(
+
+    return (
         <>
             <HeaderUser />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {destinations.map((destination) => (
-                    <DestinationCardUser 
-                    key={destination.id}
-                    imageSrc={destination.url_image}
-                    title={destination.title}
-                    subtitle={destination.location}/>
+                    <DestinationCardUser
+                        key={destination.id}
+                        destination={destination}
+                        currentUser={user} // Asegúrate de que `user` es el usuario actual
+                    />
                 ))}
             </div>
-            
         </>
-    )
+    );
 }
 
 export default Home;
