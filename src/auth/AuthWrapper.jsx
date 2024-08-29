@@ -6,19 +6,26 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
 
-    useEffect(()=>{
+    useEffect(() => {
         const storedUser = localStorage.getItem('user');
         const storedToken = localStorage.getItem('authToken');
 
         if (storedUser) setUser(JSON.parse(storedUser));
         if (storedToken) setAuthToken(storedToken);
-    },[]);
+    }, []);
 
     const login = (userData, token) => {
-        console.log("Login triggered, saving token:", token); //Debugging
-        setUser(userData);
+        
+        const updatedUserData = {
+            ...userData,
+            id: userData.id
+            //|| userData.roles?.[0]?.id 
+        };
+
+        setUser(updatedUserData);
         setAuthToken(token);
-        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('userId', updatedUserData.id); 
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
         localStorage.setItem('authToken', token);
     };
 
@@ -27,12 +34,15 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(null);
         localStorage.removeItem('user');
         localStorage.removeItem('authToken');
+        localStorage.removeItem('userId');
+        // sessionStorage.removeItem('userId')
     }
 
     return (
-        <AuthContext.Provider value={{user, authToken, login, logout}}>
+        <AuthContext.Provider value={{ user, authToken, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
 }
+
 export default AuthProvider;

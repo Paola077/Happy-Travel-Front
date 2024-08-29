@@ -20,16 +20,3 @@ const PaginationButton = ({ onClick, ariaLabel, rotate = '0' }) => {
 
 export default PaginationButton;
 
-
-//Para Pag. anterior
-/* 
-<PaginationButton   onClick={handleFunction}
-                    ariaLabel={"Ir a la página anterior"}
-                    rotate={"180"}/>
-*/
-
-//Para Pag. siguente
-/* 
-<PaginationButton   onClick={handleFunction}
-                    ariaLabel={"Ir a la página siguente"}/>
-*/
