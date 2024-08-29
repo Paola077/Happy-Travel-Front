@@ -7,13 +7,16 @@ import { apiRequest } from "../../../services/apiRequest";
 import Card from "../../card/Card";
 import CommonInput from "../../inputs/CommonInput";
 import AcceptCancelButtons from "../../buttons/AcceptCancelButtons"
+import ConfirmModal from '../../modal/ConfirmModal';
 
-const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
+const CreateEditForm = ({ url, method, headerText}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const [fileName, setFileName] = useState("Sube una imagen...");
     const [imageUrl, setImageUrl] = useState(null);
+    const [isModalOpen, setModalOpen] = useState(false); // Estado para el modal
+    const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
 
     const userId = sessionStorage.getItem('userId');
 
@@ -61,15 +64,21 @@ const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
         try {
             const response = await apiRequest(url, method, cleanedData, headers);
             console.log("API Response:", response);
-            alert(succesAlertMessage);
-            navigate('/location');
+            setSuccessMessage("Nuevo destino creado con éxito!");
+            setModalOpen(true);
         } catch (error) {
             console.error("API Error:", error);
             alert(`Error: ${error.response?.data?.message || error.message}`);
         }
     };
+    const handleConfirm = () => {
+        setModalOpen(false);  // Cierra el modal
+        navigate('/location');  // Redirige después de confirmar
+    };
+
 
     return (
+        <>
         <Card className="w-[45.813rem] h-[31.813rem] my-[5rem] border-[color:var(--col-yellow-light)] border-4 border-solid flex flex-col items-center justify-center" headerText={headerText}>
             <form className="w-full h-[31.813rem] px-[5%] grid grid-rows-[1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr_1fr] gap-0 h-full" onSubmit={handleSubmit(onSubmit)}>
 
@@ -145,6 +154,14 @@ const CreateEditForm = ({ url, method, headerText, succesAlertMessage}) => {
                 </div>
             </form>
         </Card>
+         <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={handleConfirm}
+        message={successMessage}
+        showOnlyAccept={true} 
+    />
+    </>
     );
 }
 
