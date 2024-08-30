@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 
-const cloudName = 'dikjwbx3a'; 
-const uploadPreset = 'happy_travel'; 
+const cloudName = 'YOUR_CLOUD_NAME'; 
+const uploadPreset = 'YOUR_UPLOAD_PRESET'; 
 /**
  * Uploads an image file to Cloudinary and returns the image URL.
  * @param {File} file - The image file to upload.
