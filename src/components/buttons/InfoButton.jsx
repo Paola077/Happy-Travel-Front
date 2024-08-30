@@ -1,9 +1,11 @@
 import Info from "../../../public/assets/Info-icon.svg"
 import { useNavigate } from 'react-router-dom';
-function InfoButton() {
+
+
+function InfoButton({destinationId}) {
     const navigate = useNavigate();
     const handleClick = () => {
-      navigate('/location'); // Cambiar la ruta 
+        navigate(`/location/${destinationId}`); // Navega a la página de detalles con el id
     };
     return(
         <>

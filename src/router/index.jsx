@@ -7,7 +7,7 @@ import {LocationLogged} from "../pages/LocationLogged";
 import {CreateLogged} from "../pages/CreateLogged";
 import {EditLogged} from "../pages/EditLogged";
 import PrivateRoute from "./PrivateRoutes";
-
+import TestComponent from "../components/Prueba"
 export const router = createBrowserRouter ([
     {
         path: "/",
@@ -22,11 +22,13 @@ export const router = createBrowserRouter ([
         element: <SignIn />
     },
     {
-        path: "location",
+        path: "location/:id",
         element: (
+            // <TestComponent/>
             <PrivateRoute>
                 <LocationLogged />
-            </PrivateRoute>)
+            </PrivateRoute>
+            )
     },
     {
         path: "create",

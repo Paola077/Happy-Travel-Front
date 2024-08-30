@@ -1,18 +1,60 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import HeaderUser from "../components/header/HeaderUser";
 import CustomCardLocationLogged from "../components/card/CustomCardLocationLogged";
-import images from '../../public/assets/images.jpg'
+import { useParams } from "react-router-dom";
+import { apiRequest } from "../services/apiRequest";
+import { getDestinationDetailsUrl } from "../config/urls";
 
 
 export const LocationLogged = () => {
-    return(
+    const { id: destinationId } = useParams();
+    const [destination, setDestination] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+
+    useEffect(() => {
+        const fetchDestinationDetails = async () => {
+            const token = localStorage.getItem('authToken');
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            };
+
+            try {
+                const url = getDestinationDetailsUrl(destinationId);
+                const response = await apiRequest(url, "GET", null, headers);
+                setDestination(response);
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
+        };
+
+        if (destinationId) { 
+            fetchDestinationDetails();
+        } else {
+            setLoading(false);
+            setError("Destination ID is missing.");
+        }
+    }, [destinationId]);
+
+    if (loading) return <p>Loading destination details...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
         <>
             <HeaderUser />
-            <CustomCardLocationLogged 
-            imageSrc={images}
-            title="Islas Azores"
-            subtitle="Portugal"
-            description="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut." />
+            {destination && (
+                <CustomCardLocationLogged 
+                    urlImage={destination.urlImage}
+                    title={destination.title || 'Sin título'}
+                    location={destination.location || 'Sin ubicación'}
+                    description={destination.description || 'Sin descripción'}
+                    id={destinationId}
+                />
+            )}
         </>
-    )
-}
+    );
+};
