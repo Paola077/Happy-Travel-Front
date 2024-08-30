@@ -25,7 +25,7 @@ function DestinationCardUser({ destination, currentUser, onDelete }) {
                 </div>
                 {isCreator && ( 
                     <div className="w-[5.063rem] h-[2.50rem] flex justify-between">
-                        <EditButton />
+                        <EditButton destinationId={destination.id} />
                         <DeleteButton destinationId={destination.id} onDelete={onDelete}/>
                     </div>
                 )}
