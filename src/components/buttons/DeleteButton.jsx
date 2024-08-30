@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Delete from "../../../public/assets/Delete-icon.svg";
 import ConfirmModal from '../modal/ConfirmModal'; 
-import { apiRequest } from "../../services/apiRequest";
-import { getDeleteDestinationUrl } from "../../config/urls";
 
 function DeleteButton({ destinationId, onDelete }) {
 
   const [isModalOpen, setModalOpen] = useState(false);
   
-  const navigate = useNavigate();
-
   const handleDelete = () => {
     setModalOpen(true); 
   };
@@ -22,7 +18,6 @@ function DeleteButton({ destinationId, onDelete }) {
 
       onDelete(destinationId);
 
-      //navigate("/");  
     } catch (error) {
       console.error("Error al eliminar el destino:", error);
     }

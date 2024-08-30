@@ -30,7 +30,7 @@ const uploadPreset = 'happy_travel';
 
     try {
         const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData);
-        return response.data.secure_url;
+        return response.data.secure_url; 
     } catch (error) {
         console.error("Cloudinary Upload Error:", error);
         throw new Error("Failed to upload image to Cloudinary.");

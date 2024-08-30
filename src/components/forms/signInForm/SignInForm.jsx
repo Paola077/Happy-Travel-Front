@@ -37,11 +37,9 @@ const SignInForm = () => {
 
         try {
             const response = await apiRequest(SIGN_IN_URL, "POST", cleanedData, headers);
-            console.log("API Response:", response);
             alert("Usuario registrado con éxito!");
             navigate('/login');
         } catch (error) {
-            console.error("API Error:", error);
             alert(`Error: ${error.message}`);
         }
     };

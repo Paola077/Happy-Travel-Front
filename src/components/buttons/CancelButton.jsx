@@ -11,7 +11,6 @@ const CancelButton = ({onClick, type}) => {
                     type={type}
                     className="ml-[0.625rem]"
                     />
-
     </>
     
     )
