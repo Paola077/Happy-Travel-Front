@@ -36,11 +36,11 @@ export const LocationLogged = () => {
             fetchDestinationDetails();
         } else {
             setLoading(false);
-            setError("Destination ID is missing.");
+            setError("Falta destino.");
         }
     }, [destinationId]);
 
-    if (loading) return <p>Loading destination details...</p>;
+    if (loading) return <p>Cargando detalles de destino...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (

@@ -22,20 +22,19 @@ const Home = () => {
     const handleDelete = async (destinationId) => {
         try {
             const headers = {
-              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,  // Asumiendo que guardas el token en sessionStorage
-              'Content-Type': 'application/json'
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,  
+                'Content-Type': 'application/json'
             };
             await apiRequest(getDeleteDestinationUrl(destinationId), "DELETE",  null, headers);
-            //alert('Destino eliminado con éxito');
+            
             setFilteredDestinations((prevDestinations) =>
                 prevDestinations.filter((dest) => dest.id !== destinationId)
             );
-            
-            //navigate("/");  
-          } catch (error) {
+
+        } catch (error) {
             console.error("Home: Error al eliminar el destino:", error);
-          }
-      };
+    }
+};
 
     return (
         <div className="w-full h-auto">

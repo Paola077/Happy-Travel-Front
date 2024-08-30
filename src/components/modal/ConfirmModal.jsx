@@ -16,12 +16,12 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, message, showOnlyAccept = fa
                 <div className="flex justify-center">
                 {showOnlyAccept ? (
             <AcceptButton onClick={onConfirm} />
-          ) : (
-            <>
-              <AcceptButton onClick={onConfirm} />
-              <CancelButton onClick={onClose} />
-            </>
-          )}
+            ) : (
+                <>
+                <AcceptButton onClick={onConfirm} />
+                <CancelButton onClick={onClose} />
+                </>
+            )}
                 </div>
             </div>
         </div>

@@ -37,17 +37,14 @@ export const DestinationsProvider = ({ children }) => {
         }
     };
 
-    // Initial fetch of destinations
     useEffect(() => {
         fetchDestinations();
     }, [authToken]);
 
-    // Method to refresh destinations
     const refreshDestinations = async () => {
         await fetchDestinations();
     };
 
-    // Method to filter destinations based on a query
     const filterDestinations = (query) => {
         if (!query) {
             setFilteredDestinations(destinations);

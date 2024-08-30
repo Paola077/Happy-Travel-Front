@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
         const updatedUserData = {
             ...userData,
             id: userData.id
-            //|| userData.roles?.[0]?.id 
         };
 
         setUser(updatedUserData);
@@ -35,7 +34,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
         localStorage.removeItem('authToken');
         localStorage.removeItem('userId');
-        // sessionStorage.removeItem('userId')
     }
 
     return (

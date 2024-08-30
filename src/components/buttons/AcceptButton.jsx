@@ -15,9 +15,3 @@ const AcceptButton = ({ onClick, type = "submit" }) => {
 };
 
 export default AcceptButton;
-
-//PARA USARLO EN COMPONENTES QUE NO SEAN FORMULARIOS: 
-// <AcceptButton onClick={() => FUNCCION} type="button" />
-
-//PARA USARLO EN FORMULARIOS: 
-//<AcceptButton type="submit" />
