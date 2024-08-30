@@ -30,21 +30,17 @@ const  LogInForm = () => {
         try {
             const response = await apiRequest(LOG_IN_URL, "POST", userData, headers);
     
-            // La respuesta contiene el token JWT
-            const { token, id, ...user } = response;  // Extrae el token y el resto del usuario
+            const { token, id, ...user } = response;
             console.log("API Response:", response);
     
             if (token) {
-                // Limpia el prefijo 'Bearer ' del token
                 const cleanedToken = token.startsWith('Bearer ') ? token.slice(7) : token;
-                // Guarda el token limpio en localStorage
                 login(user, cleanedToken);
-                //Guarda el user Id en sessionStorage
                 const userId = id;
                 localStorage.setItem('userId', userId);
-                alert("Login successful!"); // Mensaje de éxito
+                alert("Login successful!");
     
-                navigate('/'); // Navega a la ruta deseada
+                navigate('/'); 
             } else {
                 alert("Login failed: No token received.");
             }

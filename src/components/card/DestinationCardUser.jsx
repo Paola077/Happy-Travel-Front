@@ -13,7 +13,7 @@ function DestinationCardUser({ destination, currentUser, onDelete }) {
             <img src={destination.urlImage} alt={destination.title} className="w-full h-[18.75rem] rounded-[1.25rem] object-cover" />
             {isAuthenticated && (
                 <div className="absolute top-2 right-2">
-                    <InfoButton />
+                    <InfoButton destinationId={destination.id}/>
                 </div>
             )}
             <div className="p-4 flex justify-between">
@@ -25,7 +25,7 @@ function DestinationCardUser({ destination, currentUser, onDelete }) {
                 </div>
                 {isCreator && ( 
                     <div className="w-[5.063rem] h-[2.50rem] flex justify-between">
-                        <EditButton />
+                        <EditButton destinationId={destination.id}/>
                         <DeleteButton destinationId={destination.id} onDelete={onDelete}/>
                     </div>
                 )}

@@ -161,7 +161,7 @@ const CreateEditForm = ({ url, method, headerText}) => {
                 </div>
             </form>
         </Card>
-         <ConfirmModal
+        <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         onConfirm={handleConfirm}

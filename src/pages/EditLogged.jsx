@@ -9,7 +9,7 @@ export const EditLogged = () => {
     console.log(id); 
 
     const updateUrl = getUpdateDestinationUrl(id); 
-    console.log(updateUrl)
+    console.log(updateUrl);
 
     return (
         <div className="w-full h-auto">
@@ -19,7 +19,6 @@ export const EditLogged = () => {
             url={updateUrl}
             method="PUT"
             headerText="Editar destino"
-            succesAlertMessage="Destino editado con éxito!"
             />
         </main>
         </div>

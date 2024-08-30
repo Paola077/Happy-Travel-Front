@@ -22,11 +22,12 @@ export const router = createBrowserRouter ([
         element: <SignIn />
     },
     {
-        path: "location",
+        path: "location/:id",
         element: (
             <PrivateRoute>
                 <LocationLogged />
-            </PrivateRoute>)
+            </PrivateRoute>
+            )
     },
     {
         path: "create",

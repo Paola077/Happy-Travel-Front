@@ -3,16 +3,16 @@ import { GET_DESTINATIONS_URL, GET_DESTINATIONS_NO_AUTH_URL } from "../config/ur
 import { apiRequest } from "../services/apiRequest";
 import { AuthContext } from "../auth/AuthWrapper";
 
-// Create the context
+
 export const DestinationsContext = createContext();
 
-// Create a provider component
+
 export const DestinationsProvider = ({ children }) => {
     const { authToken } = useContext(AuthContext);
     const [destinations, setDestinations] = useState([]);
     const [filteredDestinations, setFilteredDestinations] = useState([]);
 
-    // Function to fetch destinations
+
     const fetchDestinations = async () => {
         try {
             const url = authToken ? GET_DESTINATIONS_URL : GET_DESTINATIONS_NO_AUTH_URL;
@@ -37,17 +37,14 @@ export const DestinationsProvider = ({ children }) => {
         }
     };
 
-    // Initial fetch of destinations
     useEffect(() => {
         fetchDestinations();
     }, [authToken]);
 
-    // Method to refresh destinations
     const refreshDestinations = async () => {
         await fetchDestinations();
     };
 
-    // Method to filter destinations based on a query
     const filterDestinations = (query) => {
         if (!query) {
             setFilteredDestinations(destinations);

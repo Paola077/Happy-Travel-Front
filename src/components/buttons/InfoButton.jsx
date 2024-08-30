@@ -1,14 +1,16 @@
 import Info from "../../../public/assets/Info-icon.svg"
 import { useNavigate } from 'react-router-dom';
-function InfoButton() {
+
+
+function InfoButton({destinationId}) {
     const navigate = useNavigate();
     const handleClick = () => {
-      navigate('/location'); // Cambiar la ruta 
+        navigate(`/location/${destinationId}`);
     };
     return(
         <>
         <img src={Info}
-          className="h[3.125rem] w[3.125rem] cursor-pointer" 
+            className="h[3.125rem] w[3.125rem] cursor-pointer" 
             alt="Info" 
             onClick={handleClick}/>
         </>
